@@ -2,10 +2,12 @@
 
 const request = require("./node_modules/request");
 const http = require("http");
+//specifies which local server number to use.
 const PORT=3000;
+// googleKey and googleId bring in secret password from outside file for safe keeping.
 const googleKey = require("./env");
 const googleId = require("./env");
-//create a server
+//creates a server
 const server = http.createServer(handleRequests);
 
 //start the server
@@ -14,7 +16,7 @@ server.listen(PORT,function(){
 });
 
 function handleRequests(request,response){ 
-	response.end("<h1> My favorite movie is </h1>");
+	response.end("My favorite movie is");
 	}
 
 function getMovieTitle(title){
@@ -22,12 +24,17 @@ function getMovieTitle(title){
     		function (error, response, body) {
       		//Inside that callback
       		var movieInfo = JSON.parse(body);
-      		console.log(movieInfo.items[0].title);
+      		console.log("\n"+ movieInfo.items[0].title + "\n");
+      		console.log("\n"+ movieInfo.items[0].snippet)+ "\n";
     });
 }
-
 //The actual request sending
 module.exports=getMovieTitle;
+
+
+
+
+
 
 
 // ------------------------------------- GRAVEYARD ---------------------------------------------- //
